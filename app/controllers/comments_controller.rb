@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     end 
 
     def create
-        @comment = Comment.find_or_create_by(comment_params)
+        @comment = Comment.create(comment_params)
         render json: @comment 
     end 
 
