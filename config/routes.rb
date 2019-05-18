@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  resources :memberships
   resources :groups
   resources :lifestages
   resources :user_lifestages
   resources :comments
   resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  post "/login", to:"auth#login"
+  get "/auto_login", to:"auth#auto_login"
+
 end
