@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-    def index 
+
+    def index
         @users = User.all 
         render json: @users
     end 
@@ -10,23 +11,20 @@ class UsersController < ApplicationController
     end 
 
     def create 
-        @user = User.find_or_create_by(user_params)
-        render json: @user 
+        user = User.new(
+            name: params[:name],
+            username: params[:username],
+            password: params[:password],
+            email: params[:email],
+            fun_fact: params[:fun_fact]
+        )
+
+        if user.save
+          token = encode_token(user.id)
+            render json: {user: UserSerializer.new(user), token: token}
+		else
+			render json: {errors: user.errors.full_messages}
+		end
     end 
 
-    def update
-        @user = User.find(params[:id])
-        render json: @user
-    end 
-
-    def destroy
-        @user = User.find(params[:id])
-        @user.destroy
-    end 
-
-    private 
-
-    def user_params
-        params.require(:user).permit(:name, :username, :password, :fun_fact, :email)
-    end 
 end

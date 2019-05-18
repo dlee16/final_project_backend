@@ -1,13 +1,22 @@
 class UserLifestagesController < ApplicationController
 
     def index 
-        @userls = User_lifestages.all 
+        @userls = UserLifestage.all 
         render json: @userls
     end 
 
     def show
-        @userls = User_lifestage.find(params[:id])
+        @userls = UserLifestage.find(params[:id])
         render json: @userls
     end 
 
+    def create
+        @userls = UserLifestage.find_or_create_by(userls_params)
+        render json: @userls
+    end 
+    
+    private
+    def userls_params
+        params.require(:user_lifestage).permit(:user_id, :lifestage_id)
+    end 
 end
