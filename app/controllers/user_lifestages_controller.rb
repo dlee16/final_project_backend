@@ -14,6 +14,11 @@ class UserLifestagesController < ApplicationController
         @userls = UserLifestage.find_or_create_by(userls_params)
         render json: @userls
     end 
+
+    def destroy
+        @userls = UserLifestage.find(params[:id])
+        @userls.destroy
+    end 
     
     private
     def userls_params
