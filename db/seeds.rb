@@ -12,6 +12,8 @@ u2 = User.create(name: "test2", username:"test2", password:"test2", email:"test2
 
 #lifestages:
 l1= Lifestage.create(name:"Career Change", description:"Good things never come from comfort zones. It's never too late to start something new.")
+l2= Lifestage.create(name:"Recent Grads", description:"Time to spread your wings and enter the real world.")
+l3= Lifestage.create(name:"Becoming a Parent", description:"Becoming a parent isn't just a new chapter of your life, it's a book.")
 
 #groups: 
 g1= Group.create(name:"Is bootcamp worth it?", description:"Questions, tips, and resources for those considering joining a bootcamp", lifestage_id: l1.id )
@@ -26,3 +28,7 @@ c4 = Comment.create(user_id: u2.id, group_id: g2.id, user_comment:"USE LINKEDIN!
 #user_lifestages: 
 ul1= UserLifestage.create(user_id: u1.id, lifestage_id: l1.id)
 ul2= UserLifestage.create(user_id: u2.id, lifestage_id: l1.id)
+
+#memberships:
+u1 = Membership.create(user_id: u1.id, lifestage_id:l1.id)
+u1 = Membership.create(user_id: u2.id, lifestage_id:l1.id)

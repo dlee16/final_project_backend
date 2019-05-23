@@ -15,6 +15,18 @@ class CommentsController < ApplicationController
         render json: @comment 
     end 
 
+    def update 
+        @comment = Comment.find(params[:id])
+        @comment.update(comment_params)
+        render json: Comment.all
+    end 
+
+    def destroy 
+        @comment = Comment.find(params[:id])
+        @comment.destroy
+        render json: Comment.all
+    end 
+
     private
     
     def comment_params

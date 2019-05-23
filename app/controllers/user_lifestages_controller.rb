@@ -15,9 +15,10 @@ class UserLifestagesController < ApplicationController
         render json: @userls
     end 
     
-    def remove 
-        @userls = UserLifestage.find_by(user_id:current_user[:id], lifestage_id: params[:id])
+    def destroy
+        @userls = UserLifestage.find(params[:id])
         @userls.destroy
+        render json: UserLifestage.all
     end 
     
     private

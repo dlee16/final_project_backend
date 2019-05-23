@@ -1,9 +1,11 @@
 class MembershipSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :group_id, :lifestage_id
-  belongs_to :user
-  belongs_to :group
-end
+  attributes :id, :user, :group, :user_id
 
-def lifestage_id
-  self.group.lifestage_id
-end 
+  def group
+    GroupSerializer.new(self.object.group)
+  end 
+
+  def user_id
+    self.object.user.id
+  end 
+end
