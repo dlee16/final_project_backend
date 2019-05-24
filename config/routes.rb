@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post "/login", to:"auth#login"
   get "/auto_login", to:"auth#auto_login"
 
+  mount ActionCable.server => '/socket'
 end

@@ -11,8 +11,18 @@ class CommentsController < ApplicationController
     end 
 
     def create
-        @comment = Comment.create(comment_params)
-        render json: @comment 
+        @comment = Comment.new(
+            user_id: params[:user_id],
+            group_id: params[:group_id],
+            user_comment: params[:user_comment]
+            )
+        
+        if @comment.save
+            ActionCable.server.broadcast("feed_channel", @comment)
+            render json:@comment 
+        else 
+            render json: {error: 'Could not create that comment'}, status: 422
+        end 
     end 
 
     def update 
@@ -27,11 +37,11 @@ class CommentsController < ApplicationController
         render json: Comment.all
     end 
 
-    private
+    # private
     
-    def comment_params
-        params.require(:comment).permit(:user_id, :group_id, :user_comment)
-    end 
+    # def comment_params
+    #     params.require(:comment).permit(:user_id, :group_id, :user_comment)
+    # end 
     
 
 end
