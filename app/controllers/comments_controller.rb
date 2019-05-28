@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
             )
         
         if @comment.save
-            ActionCable.server.broadcast("feed_channel", @comment)
+            ActionCable.server.broadcast("feed_channel", CommentSerializer.new(@comment))
             render json:@comment 
         else 
             render json: {error: 'Could not create that comment'}, status: 422
@@ -37,11 +37,11 @@ class CommentsController < ApplicationController
         render json: Comment.all
     end 
 
-    # private
+    private
     
-    # def comment_params
-    #     params.require(:comment).permit(:user_id, :group_id, :user_comment)
-    # end 
+    def comment_params
+        params.require(:comment).permit(:user_id, :group_id, :user_comment)
+    end 
     
 
 end
