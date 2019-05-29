@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
     def index 
         @comments = Comment.all 
-        render json: @comments
+        render json: @comments.order('id ASC')
     end 
 
     def show
@@ -28,7 +28,8 @@ class CommentsController < ApplicationController
     def update 
         @comment = Comment.find(params[:id])
         @comment.update(comment_params)
-        render json: Comment.all
+        ActionCable.server.broadcast("feed_channel", CommentSerializer.new(@comment))
+        render json: Comment.all.order('id ASC')
     end 
 
     def destroy 

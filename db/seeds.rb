@@ -14,6 +14,11 @@ u2 = User.create(name: "test2", username:"test2", password:"test2", email:"test2
 l1= Lifestage.create(name:"Career Change", description:"Good things never come from comfort zones. It's never too late to start something new.")
 l2= Lifestage.create(name:"Recent Grads", description:"Time to spread your wings and enter the real world.")
 l3= Lifestage.create(name:"Becoming a Parent", description:"Becoming a parent isn't just a new chapter of your life, it's a book.")
+l4= Lifestage.create(name:"Getting Married", description:"Building your life with your best friend.")
+l5= Lifestage.create(name:"Mid-life Crisis", description:"Help...")
+l6= Lifestage.create(name:"Divorce", description:"It's messy and never easy...")
+l7= Lifestage.create(name:"Losing a Loved One", description:"Goodbyes are never easy")
+l8= Lifestage.create(name:"Retirement", description:"Time to stop living at work and start working at living")
 
 #groups: 
 g1= Group.create(name:"Is bootcamp worth it?", description:"Questions, tips, and resources for those considering joining a bootcamp", lifestage_id: l1.id )
