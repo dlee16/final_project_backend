@@ -62,4 +62,3 @@ c4 = Comment.create(user_id: u2.id, group_id: g2.id, user_comment:"USE LINKEDIN!
 ul1= UserLifestage.create(user_id: u1.id, lifestage_id: l1.id)
 
 #memberships:
-m1 = Membership.create(user_id: u1.id, lifestage_id: l1.id)
