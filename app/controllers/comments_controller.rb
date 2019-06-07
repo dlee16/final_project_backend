@@ -35,6 +35,7 @@ class CommentsController < ApplicationController
     def destroy 
         @comment = Comment.find(params[:id])
         @comment.destroy
+        # ActionCable.server.broadcast("feed_channel", CommentSerializer.new(Comment.all))
         render json: Comment.all
     end 
 
