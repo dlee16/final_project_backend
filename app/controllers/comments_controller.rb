@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
     def index 
         @comments = Comment.all 
-        render json: @comments.order('id ASC')
+        render json: @comments.order('id DESC')
     end 
 
     def show
@@ -15,11 +15,11 @@ class CommentsController < ApplicationController
             user_id: params[:user_id],
             group_id: params[:group_id],
             user_comment: params[:user_comment]
-            )
+        )
         
         if @comment.save
             ActionCable.server.broadcast("feed_channel", CommentSerializer.new(@comment))
-            render json:@comment 
+            render json:@comment
         else 
             render json: {error: 'Could not create that comment'}, status: 422
         end 
@@ -29,14 +29,13 @@ class CommentsController < ApplicationController
         @comment = Comment.find(params[:id])
         @comment.update(comment_params)
         ActionCable.server.broadcast("feed_channel", CommentSerializer.new(@comment))
-        render json: Comment.all.order('id ASC')
+        render json: Comment.all.order('id DESC')
     end 
 
     def destroy 
         @comment = Comment.find(params[:id])
         @comment.destroy
-        # ActionCable.server.broadcast("feed_channel", CommentSerializer.new(Comment.all))
-        render json: Comment.all
+        render json: Comment.all.order('id DESC')
     end 
 
     private
